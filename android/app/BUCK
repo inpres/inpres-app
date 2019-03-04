@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.inpres_app",
+    package = "me.franciscohanna.inpres_app",
 )
 
 android_resource(
     name = "res",
-    package = "com.inpres_app",
+    package = "me.franciscohanna.inpres_app",
     res = "src/main/res",
 )
 

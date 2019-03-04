@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {Alert} from 'react-native';
 import {Body, Left, ListItem, Text, Right, Icon} from "native-base";
 import LinearGradient from "react-native-linear-gradient";
 

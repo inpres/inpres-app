@@ -1,4 +1,4 @@
-package com.inpres_app;
+package me.franciscohanna.inpres_app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

@@ -31,8 +31,6 @@ export default class QuakeViewScreen extends React.Component {
         firebase.database()
             .ref(`quakes/${quakeId}`)
             .once('value', snapshopt => {
-                console.log("el sismossssss");
-                console.log(snapshopt.val());
                 this.setState({
                     quake: snapshopt.val()
                 });

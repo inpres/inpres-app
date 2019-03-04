@@ -1,32 +1,25 @@
 import React from "react";
+import {toArray} from "lodash";
+
 import {StyleSheet} from 'react-native';
+import {Icon, View, Text} from 'native-base';
 
 import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
 
 import firebase from "react-native-firebase";
-import {toArray} from "lodash";
+import LinearGradient from "react-native-linear-gradient";
 
 export default class QuakeMapScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quakes: []
+            quakes: [],
+            user: null
         };
     }
 
     componentDidMount(): void {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                console.log(position);
-            },
-            error => {
-                console.log(error);
-            },
-            {
-                enableHighAccuracy: false
-            });
-
         firebase.database()
             .ref('quakes/')
             .orderBy('timestamp')
@@ -36,10 +29,27 @@ export default class QuakeMapScreen extends React.Component {
                     quakes: toArray(snapshot.val())
                 });
             });
+
+        navigator.geolocation.watchPosition(
+            ({coords}) => {
+                this.setState({
+                    ...this.state,
+                    user: {
+                        longitude: coords.longitude,
+                        latitude: coords.latitude
+                    }
+                })
+            },
+            error => {
+                console.log(error);
+            },
+            {
+                enableHighAccuracy: false
+            });
     }
 
     render() {
-        const distanceDelta = Math.exp(Math.log(360) - (4 * Math.LN2));
+        const distanceDelta = Math.exp(Math.log(360) - (5 * Math.LN2));
 
         return (
             <MapView
@@ -58,10 +68,27 @@ export default class QuakeMapScreen extends React.Component {
                             longitude: parseFloat(quake.longitude),
                         }}
                         title={quake.place}
-                        description={quake.timestamp}
-                    />
+                        description={quake.timestamp}>
+                        <View
+                            style={{padding: 8, borderRadius: 999, backgroundColor: 'red', opacity: 0.5}}>
+                            <Text style={{color: 'white', fontWeight: 'bold'}}>
+                                {quake.magnitude % 1 === 0 ? `${quake.magnitude}.0` : quake.magnitude}
+                            </Text>
+                        </View>
+                    </Marker>
 
                 })}
+                {
+                    this.state.user &&
+                    <Marker
+                        coordinate={{
+                            latitude: this.state.user.latitude,
+                            longitude: this.state.user.longitude,
+                        }}
+                        pinColor='blue'>
+                        <Icon type='MaterialIcons' name='gps-fixed' style={{color: 'blue'}} />
+                    </Marker>
+                }
             </MapView>
         );
     }

@@ -32,7 +32,6 @@ export default class QuakeListScreen extends React.Component {
                         ...quakesObj[quakeId]
                     })
                 });
-                console.log(quakesArray);
                 this.setState({
                     quakes: orderBy(quakesArray, 'timestamp', 'desc')
                 });

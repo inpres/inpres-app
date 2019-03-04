@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:927546823584:android:e6fd5af5ef782706",
         "android_client_info": {
-          "package_name": "com.inpres_app"
+          "package_name": "me.franciscohanna.inpres_app"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "927546823584-2lb0is0c5e0risvdn9ifo9qi5d38k4fs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.inpres_app",
+            "package_name": "me.franciscohanna.inpres_app",
             "certificate_hash": "1a7ff50c89238e75faeb94f53a739403341aebaa"
           }
         },

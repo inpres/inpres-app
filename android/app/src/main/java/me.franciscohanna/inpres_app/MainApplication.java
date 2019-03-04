@@ -1,4 +1,4 @@
-package com.inpres_app;
+package me.franciscohanna.inpres_app;
 
 import android.app.Application;
 
